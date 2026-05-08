@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Faculty of Science — Damanhour University</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div id="screen-auth">
+      <div class="auth-page">
+        <header class="auth-topbar">
+          <div class="auth-topbar-start">
+            <img src="/images/faculty-science-logo.jpg" alt="Faculty of Science logo" class="auth-topbar-logo" />
+            <div class="auth-topbar-text">
+              <span class="auth-topbar-faculty" data-i18n="faculty">Faculty of Science</span>
+              <span class="auth-topbar-uni hint-muted" data-i18n="uni">Damanhour University</span>
+            </div>
+          </div>
+            <div class="auth-lang" role="group" aria-label="Language">
+            <button id="btn-lang-ar" class="btn btn-auth-lang" type="button" data-i18n="langEn">English</button>
+          </div>
+        </header>
+
+        <div class="auth-layout">
+          <main class="auth-main">
+            <div class="auth-card">
+              <h2 class="auth-card-title" id="auth-form-title" data-i18n="loginTab">Sign in</h2>
+              <p class="auth-card-hint hint-muted" data-i18n="authSwitchHint">
+                New accounts are created by administrators only.
+              </p>
+
+              <div class="auth-segment" role="tablist" aria-label="Sign-in mode">
+                <button
+                  type="button"
+                  id="auth-tab-login"
+                  class="auth-segment-btn is-active"
+                  role="tab"
+                  aria-selected="true"
+                  aria-controls="pane-login"
+                  data-i18n="loginTab"
+                >
+                  Sign in
+                </button>
+              </div>
+
+              <div
+                id="pane-login"
+                class="auth-pane"
+                role="tabpanel"
+                aria-labelledby="auth-tab-login"
+              >
+                <form id="login-form" class="form-grid auth-form">
+                  <div class="form-field">
+                    <label for="login-email" data-i18n="email">Email</label>
+                    <input
+                      id="login-email"
+                      name="email"
+                      type="email"
+                      autocomplete="username"
+                      inputmode="email"
+                      required
+                    />
+                  </div>
+                  <div class="form-field">
+                    <label for="login-password" data-i18n="password">Password</label>
+                    <input
+                      id="login-password"
+                      name="password"
+                      type="password"
+                      autocomplete="current-password"
+                      required
+                    />
+                  </div>
+                  <button class="btn btn-primary btn-auth-submit" type="submit" data-i18n="signIn">
+                    Sign in
+                  </button>
+                </form>
+              </div>
+
+              <div
+                id="pane-register"
+                class="auth-pane hidden"
+                role="tabpanel"
+                aria-labelledby="auth-tab-register"
+                hidden
+              >
+                <p class="auth-staff-note hint-muted" data-i18n="staffProvisionNote"></p>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <div id="screen-app" class="hidden">
+      <div class="app-shell" id="app-shell">
+        <aside class="sidebar" id="app-sidebar" aria-label="Main navigation">
+          <div class="sidebar-inner">
+            <div class="sidebar-brand">
+              <div class="sidebar-brand-text">
+                <div class="brand-title" data-i18n="faculty">Faculty of Science</div>
+                <div class="brand-sub" data-i18n="uni">Damanhour University</div>
+                <div class="sidebar-user-line">
+                  <span id="user-name-label"></span>
+                  <span class="pill pill-accent" id="user-role-label"></span>
+                </div>
+              </div>
+            </div>
+
+            <nav class="sidebar-nav">
+              <div class="nav-muted nav-heading" data-i18n="dashboard">Dashboard</div>
+              <button type="button" class="nav-btn active" id="nav-btn-dashboard" data-target-view="view-dashboard">
+                <span class="nav-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 10.5L12 3l9 7.5V20a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1v-9.5z" />
+                  </svg>
+                </span>
+                <span class="nav-label" data-i18n="dashboard">Dashboard</span>
+              </button>
+
+              <div id="student-nav-block" class="nav-extra-block" hidden>
+                <div class="nav-muted nav-heading" data-i18n="studentPanel">Student space</div>
+              </div>
+
+              <div id="doctor-nav-block" class="nav-extra-block" hidden>
+                <div class="nav-muted nav-heading" data-i18n="doctorPanel">Doctor space</div>
+              </div>
+
+              <div id="admin-nav-block" class="nav-extra-block" hidden>
+                <div class="nav-muted nav-heading" data-i18n="adminPanel">Administration</div>
+                <button type="button" class="nav-btn" data-target-view="view-admin-console">
+                  <span class="nav-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                    </svg>
+                  </span>
+                  <span class="nav-label" data-i18n="users">Users</span>
+                </button>
+                <button type="button" class="nav-btn" data-target-view="view-admin-analytics">
+                  <span class="nav-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M18 20V10M12 20V4M6 20v-6" />
+                    </svg>
+                  </span>
+                  <span class="nav-label" data-i18n="analytics">Statistics</span>
+                </button>
+                <button type="button" class="nav-btn" data-target-view="view-admin-export">
+                  <span class="nav-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                    </svg>
+                  </span>
+                  <span class="nav-label" data-i18n="exports">Data export</span>
+                </button>
+              </div>
+
+              <div class="nav-spacer" aria-hidden="true"></div>
+
+              <button type="button" class="nav-btn nav-btn-notif" data-target-view="view-notifications">
+                <span class="nav-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 8A6 6 0 106 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
+                  </svg>
+                </span>
+                <span class="nav-label" data-i18n="notifications">Notifications</span>
+                <span id="sidebar-notif-wrap" class="nav-badge-wrap" hidden>
+                  <span id="notif-sidebar-count" class="nav-badge">0</span>
+                </span>
+              </button>
+
+              <button type="button" class="nav-btn" data-target-view="view-profile">
+                <span class="nav-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z" />
+                  </svg>
+                </span>
+                <span class="nav-label" data-i18n="profile">Profile</span>
+              </button>
+
+              <div class="nav-spacer-grow" aria-hidden="true"></div>
+
+              <button id="logout-btn-sidebar" type="button" class="nav-btn nav-btn-logout">
+                <span class="nav-icon nav-icon-logout" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" />
+                  </svg>
+                </span>
+                <span class="nav-label" data-i18n="logout">Log out</span>
+              </button>
+            </nav>
+          </div>
+        </aside>
+
+        <main class="main-area">
+          <header class="app-top-header">
+            <div class="app-top-header-title">
+              <img src="/images/faculty-science-logo.jpg" alt="Faculty of Science logo" class="app-header-logo" />
+              <div>
+                <h1 class="app-header-title" data-i18n="smartDashboard">Smart control panel</h1>
+                <p class="app-header-sub hint-muted" id="app-header-subline"></p>
+              </div>
+            </div>
+            <div class="app-top-header-end">
+              <div class="app-top-header-tools">
+                <button
+                  type="button"
+                  class="header-notif-btn"
+                  id="header-notif-btn"
+                  title="Notifications"
+                  aria-label="Notifications"
+                >
+                  <span class="header-notif-icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M18 8A6 6 0 106 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
+                    </svg>
+                  </span>
+                  <span id="header-notif-badge" class="header-notif-badge" hidden>0</span>
+                </button>
+
+                <button type="button" class="header-profile-chip" id="header-profile-chip" title="Profile">
+                  <span class="header-avatar" id="header-user-avatar">?</span>
+                  <span class="header-email" id="header-user-email"></span>
+                </button>
+
+                <div class="top-actions header-lang">
+                  <button id="btn-lang-ar-app" type="button" class="btn btn-ghost btn-compact btn-lang" data-i18n="langAr">
+                    English
+                  </button>
+                </div>
+              </div>
+            </div>
+          </header>
+
+          <script>
+            document.addEventListener('DOMContentLoaded', function () {
+              var ar = document.getElementById('btn-lang-ar-app');
+              if (ar)
+                ar.onclick = function () {
+                  window.DH_AUTH.setLang('en');
+                };
+            });
+          </script>
+
+          <section id="view-dashboard-student" class="view-section">
+            <div id="hub-student" hidden>
+              <div id="student-dash-overview" class="student-dashboard-panels">
+                <div class="stats-row" id="student-stats-row" aria-label="Summary"></div>
+
+                <section
+                  class="student-panel student-panel-courses card"
+                  aria-labelledby="student-panel-courses-title"
+                >
+                  <div class="card-head">
+                    <h2 class="card-title" id="student-panel-courses-title" data-i18n="courses">Courses</h2>
+                  </div>
+                  <p class="hint-muted student-panel-desc" data-i18n="studentCoursesHint">
+                    Click a course to open its materials directly.
+                  </p>
+                  <div id="student-course-cards" class="course-cards-grid"></div>
+                </section>
+
+                <section
+                  class="student-panel student-panel-assignments card"
+                  aria-labelledby="student-panel-assignments-title"
+                >
+                  <div class="card-head">
+                    <h2 class="card-title" id="student-panel-assignments-title" data-i18n="assignments">
+                      Assignments
+                    </h2>
+                  </div>
+                  <div class="table-wrap">
+                    <table class="simple">
+                      <thead>
+                        <tr>
+                          <th>Course</th>
+                          <th>Title</th>
+                          <th>Deadline</th>
+                          <th>File</th>
+                          <th>Grade</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody id="student-assignments-body"></tbody>
+                    </table>
+                  </div>
+                </section>
+
+                <section
+                  class="student-panel student-panel-submit card"
+                  aria-labelledby="student-panel-submit-title"
+                >
+                  <div class="card-head">
+                    <h2 class="card-title" id="student-panel-submit-title" data-i18n="studentSubmitTitle">
+                      Submit assignment file
+                    </h2>
+                  </div>
+                  <form id="student-submit-form" class="form-grid" enctype="multipart/form-data">
+                    <div>
+                      <label for="student-course-submit-select">Course</label>
+                      <select id="student-course-submit-select" name="course_id" required></select>
+                    </div>
+                    <div>
+                      <label for="student-submit-file">File (<= 10 MB)</label>
+                      <input id="student-submit-file" name="file" type="file" required />
+                    </div>
+                    <button class="btn btn-primary" type="submit">Upload</button>
+                  </form>
+                </section>
+              </div>
+
+              <div id="student-course-material-view" class="course-material-view hidden">
+                <div class="course-detail-toolbar">
+                  <button type="button" id="btn-student-course-back" class="btn btn-ghost btn-mini">← Courses</button>
+                  <div>
+                    <div class="course-detail-title" id="student-course-view-title"></div>
+                    <div class="hint-muted" id="student-course-view-sub"></div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-head">
+                    <div class="card-title" data-i18n="materials">Course materials</div>
+                  </div>
+                  <div id="student-course-materials-list" class="material-tiles"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="view-dashboard-doctor" class="view-section">
+            <div id="hub-doctor" hidden>
+              <div id="doctor-courses-hub" class="doctor-courses-hub">
+                <div class="section-head">
+                  <h2 class="section-title">My Courses</h2>
+                  <p class="hint-muted section-desc">Choose a course to view course files.</p>
+                </div>
+                <div id="doctor-course-cards" class="course-cards-grid"></div>
+
+                <div id="doctor-course-panel" class="course-detail-panel hidden">
+                  <div class="course-detail-toolbar">
+                    <button type="button" id="btn-doctor-course-close" class="btn btn-ghost btn-mini">← All courses</button>
+                    <div>
+                      <div class="course-detail-title" id="doctor-course-panel-title"></div>
+                      <div class="hint-muted" id="doctor-course-panel-sub"></div>
+                    </div>
+                  </div>
+
+                  <div class="card">
+                    <div class="card-head">
+                      <div class="card-title">Course Files</div>
+                    </div>
+                    <div id="doctor-panel-materials-list" class="material-tiles"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="card" style="margin-top: 1rem">
+                <div class="card-head">
+                  <div class="card-title">Create Assignment</div>
+                </div>
+                <form id="doctor-assignment-form" class="form-grid" enctype="multipart/form-data">
+                  <div>
+                    <label for="doctor-assignment-course">Course</label>
+                    <select id="doctor-assignment-course" name="course_id" required></select>
+                  </div>
+                  <div>
+                    <label for="assignment-title">Title</label>
+                    <input id="assignment-title" name="title" required />
+                  </div>
+                  <div>
+                    <label for="assignment-deadline">Deadline</label>
+                    <input id="assignment-deadline" name="deadline" type="datetime-local" required />
+                  </div>
+                  <div>
+                    <label for="assignment-file">Attachment (optional)</label>
+                    <input id="assignment-file" name="file" type="file" />
+                  </div>
+                  <div>
+                    <label for="assignment-desc">Description</label>
+                    <textarea id="assignment-desc" name="description" rows="3"></textarea>
+                  </div>
+                  <button class="btn btn-primary" type="submit">Create</button>
+                </form>
+              </div>
+
+              <div class="card" style="margin-top: 1rem">
+                <div class="card-head">
+                  <div class="card-title">Submissions & Grading</div>
+                </div>
+                <div class="table-wrap">
+                  <table class="simple">
+                    <thead>
+                      <tr>
+                        <th>Student</th>
+                        <th>Assignment</th>
+                        <th>Submitted</th>
+                        <th>File</th>
+                        <th>Status</th>
+                        <th>Grade</th>
+                      </tr>
+                    </thead>
+                    <tbody id="doctor-grade-body"></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="grid-2" style="margin-top: 1rem">
+                <div class="card">
+                  <div class="card-head">
+                    <div class="card-title">Upload Material</div>
+                  </div>
+                  <form id="doctor-material-form" class="form-grid" enctype="multipart/form-data">
+                    <div>
+                      <label for="doctor-material-course">Course</label>
+                      <select id="doctor-material-course" name="course_id" required></select>
+                    </div>
+                    <div>
+                      <label for="material-title">Title</label>
+                      <input id="material-title" name="title" />
+                    </div>
+                    <div>
+                      <label for="material-file">File</label>
+                      <input id="material-file" name="file" type="file" required />
+                    </div>
+                    <button class="btn btn-primary" type="submit">Upload</button>
+                  </form>
+                </div>
+                <div class="card">
+                  <div class="card-head">
+                    <div class="card-title">Your Materials</div>
+                  </div>
+                  <div class="table-wrap">
+                    <table class="simple">
+                      <thead>
+                        <tr>
+                          <th>Course</th>
+                          <th>Title</th>
+                          <th>Link</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody id="doctor-materials-body"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="view-dashboard" class="view-section">
+            <div id="hub-admin" hidden>
+              <div class="hint-muted" style="margin-bottom: 0.75rem">
+                Use navigation items to manage users, analytics, and CSV export.
+              </div>
+            </div>
+          </section>
+
+          <section id="view-admin-console" class="view-section">
+            <div class="grid-2">
+              <div class="card">
+                <div class="card-head">
+                  <div class="card-title">Create User</div>
+                </div>
+                <form id="admin-user-create-form" class="form-grid">
+                  <div>
+                    <label for="new-user-name">Name</label>
+                    <input id="new-user-name" name="name" required />
+                  </div>
+                  <div>
+                    <label for="new-user-email">Email</label>
+                    <input id="new-user-email" name="email" type="email" required />
+                  </div>
+                  <div>
+                    <label for="new-user-pass">Password</label>
+                    <input id="new-user-pass" name="password" type="password" required />
+                  </div>
+                  <div>
+                    <label for="new-user-role">Role</label>
+                    <select id="new-user-role" name="role" required>
+                      <option value="student">student</option>
+                      <option value="doctor">doctor</option>
+                      <option value="admin">admin</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="new-user-year">Academic Year</label>
+                    <input id="new-user-year" name="academic_year" type="number" min="1" max="6" />
+                  </div>
+                  <div>
+                    <label for="new-user-dept">Department</label>
+                    <input id="new-user-dept" name="department" />
+                  </div>
+                  <button class="btn btn-primary" type="submit">Create</button>
+                </form>
+              </div>
+              <div class="card">
+                <div class="card-head">
+                  <div class="card-title">Create Course</div>
+                </div>
+                <form id="admin-course-form" class="form-grid">
+                  <div>
+                    <label for="admin-course-name">Name</label>
+                    <input id="admin-course-name" name="name" required />
+                  </div>
+                  <div>
+                    <label for="admin-course-doctor">Doctor</label>
+                    <select id="admin-course-doctor" name="doctor_id" required></select>
+                  </div>
+                  <div>
+                    <label for="admin-course-year">Academic Year (optional)</label>
+                    <input id="admin-course-year" name="academic_year" type="number" min="1" max="6" />
+                  </div>
+                  <div>
+                    <label for="admin-course-dept">Department (optional)</label>
+                    <input id="admin-course-dept" name="department" />
+                  </div>
+                  <div>
+                    <label for="admin-course-desc">Description</label>
+                    <textarea id="admin-course-desc" name="description" rows="3"></textarea>
+                  </div>
+                  <button class="btn btn-primary" type="submit">Create Course</button>
+                </form>
+              </div>
+            </div>
+            <div class="grid-2" style="margin-top: 1.5rem">
+              <div class="card">
+                <div class="card-head">
+                  <div class="card-title">Manage Courses</div>
+                </div>
+                <div class="table-wrap">
+                  <table class="simple">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Doctor</th>
+                        <th>Year</th>
+                        <th>Department</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="admin-courses-body"></tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-head">
+                  <div class="card-title">Users Directory</div>
+                </div>
+                <div class="table-wrap">
+                  <table class="simple">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Academic Year</th>
+                        <th>Department</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="admin-users-body"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="card" style="margin-top: 1.5rem">
+              <div class="card-head">
+                <div class="card-title">All Student Submissions</div>
+              </div>
+              <div class="table-wrap">
+                <table class="simple">
+                  <thead>
+                    <tr>
+                      <th>Student</th>
+                      <th>Course</th>
+                      <th>Assignment</th>
+                      <th>Submitted At</th>
+                      <th>File</th>
+                      <th>Status</th>
+                      <th>Grade</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-submissions-body"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section id="view-admin-analytics" class="view-section">
+            <div class="grid-2">
+              <div class="card">
+                <div class="card-head">
+                  <div class="card-title">Role distribution</div>
+                </div>
+                <div id="admin-stats-chart"></div>
+              </div>
+              <div class="card">
+                <div class="card-head">
+                  <div class="card-title">Key metrics</div>
+                </div>
+                <div id="admin-stats-meta" class="grid-2"></div>
+                <div style="margin-top: 0.75rem">
+                  <div class="nav-muted" style="margin-bottom: 0.35rem">Recent submissions</div>
+                  <div id="admin-recent-submissions" class="notif-list"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="view-admin-export" class="view-section">
+            <div class="card">
+              <div class="card-head">
+                <div class="card-title">CSV export</div>
+              </div>
+              <p class="hint-muted">
+                Download all submissions including student, assignment, course, grade, and timestamp.
+              </p>
+              <button id="admin-export-btn" class="btn btn-primary" type="button">Download CSV</button>
+            </div>
+          </section>
+
+          <section id="view-notifications" class="view-section">
+            <div class="card">
+              <div class="card-head">
+                <div class="card-title" data-i18n="notifications">Notifications</div>
+                <button id="notif-mark-all-read" class="btn btn-ghost" type="button">Mark all as read</button>
+              </div>
+              <div id="notif-list" class="notif-list"></div>
+            </div>
+          </section>
+
+          <section id="view-profile" class="view-section">
+            <div class="card profile-card">
+              <div class="card-head profile-card-head">
+                <div class="profile-card-head-brand">
+                  <div class="card-title" data-i18n="profile">Profile</div>
+                </div>
+                <span class="pill"> <span data-i18n="roleLabel">Role</span>: <span id="profile-role"></span> </span>
+              </div>
+              <form id="profile-form" class="form-grid">
+                <div>
+                  <label for="profile-name" data-i18n="name">Full name</label>
+                  <input id="profile-name" required />
+                </div>
+                <div>
+                  <label for="profile-email" data-i18n="email">Email</label>
+                  <input id="profile-email" type="email" disabled />
+                </div>
+                <div>
+                  <label for="profile-year" data-i18n="academicYear">Academic year (optional)</label>
+                  <input id="profile-year" type="number" min="1" max="6" />
+                </div>
+                <div>
+                  <label for="profile-dept" data-i18n="department">Department (optional)</label>
+                  <input id="profile-dept" />
+                </div>
+                <div>
+                  <label for="profile-current-pass" data-i18n="currentPassword">Current password</label>
+                  <input id="profile-current-pass" type="password" autocomplete="current-password" />
+                </div>
+                <div>
+                  <label for="profile-new-pass" data-i18n="newPassword">New password</label>
+                  <input id="profile-new-pass" type="password" autocomplete="new-password" />
+                </div>
+                <button class="btn btn-primary" type="submit" data-i18n="saveProfile">Save profile</button>
+              </form>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script src="/js/auth.js" defer></script>
+    <script src="/js/notifications.js" defer></script>
+    <script src="/js/upload.js" defer></script>
+    <script src="/js/dashboard.js" defer></script>
+  </body>
+</html>
+
+
+
+
