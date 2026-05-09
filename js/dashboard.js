@@ -1078,7 +1078,7 @@
         if (hasFile) {
           const fd = new FormData(form);
           const token = window.DH_AUTH.getToken();
-          const res = await fetch('/api/assignments', {
+          const res = await fetch('https://project-12-production.up.railway.app/api/assignments', {
             method: 'POST',
             headers: { Authorization: 'Bearer ' + token },
             body: fd,
@@ -1240,7 +1240,7 @@
   async function exportCsv() {
     try {
       const token = window.DH_AUTH.getToken();
-      const res = await fetch('/api/admin/export/submissions', {
+      const res = await fetch('https://project-12-production.up.railway.app/api/admin/export/submissions', {
         headers: { Authorization: 'Bearer ' + token },
       });
       if (!res.ok) {

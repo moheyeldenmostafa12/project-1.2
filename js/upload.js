@@ -24,7 +24,7 @@
 
       try {
         const token = window.DH_AUTH.getToken();
-        const res = await fetch('/api/submissions', {
+        const res = await fetch('https://project-12-production.up.railway.app/api/submissions', {
           method: 'POST',
           headers: { Authorization: 'Bearer ' + token },
           body: fd,
@@ -64,7 +64,7 @@
 
       try {
         const token = window.DH_AUTH.getToken();
-        const res = await fetch('/api/materials', {
+        const res = await fetch('https://project-12-production.up.railway.app/api/materials', {
           method: 'POST',
           headers: { Authorization: 'Bearer ' + token },
           body: fd,
