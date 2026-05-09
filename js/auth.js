@@ -150,7 +150,8 @@
     window.DH_APP_STATE.user = null;
   }
 
-  async function apiJson(path, options) {
+  async function apiJson(path, options) {const BASE_URL = 'https://project-12-production.up.railway.app';
+const url = path.startsWith('http') ? path : BASE_URL + path;
     const headers = options && options.headers ? { ...options.headers } : {};
     if (!(options && options.body instanceof FormData)) {
       headers['Content-Type'] = 'application/json';
@@ -160,7 +161,7 @@
       headers.Authorization = 'Bearer ' + token;
     }
 
-    const res = await fetch(path, {
+    const res = await fetch(url, {
       ...options,
       headers,
     });
