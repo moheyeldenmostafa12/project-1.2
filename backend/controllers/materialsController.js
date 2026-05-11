@@ -148,7 +148,7 @@ async function createMaterial(req, res) {
         }
       }
 
-      const fileUrl = `/uploads/materials/${req.file.filename}`;
+      const baseUrl = process.env.RAILWAY_URL || `http://localhost:${process.env.PORT || 3000}`; const fileUrl = `${baseUrl}/uploads/materials/${req.file.filename}`;
       const uploaderId = user.role === 'admin' && req.body.uploaded_by
         ? Number(req.body.uploaded_by)
         : user.id;
