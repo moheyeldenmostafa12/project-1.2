@@ -17,7 +17,7 @@
               <span class="auth-topbar-uni hint-muted" data-i18n="uni">Damanhour University</span>
             </div>
           </div>
-            <div class="auth-lang" role="group" aria-label="Language">
+          <div class="auth-lang" role="group" aria-label="Language">
             <button id="btn-lang-ar" class="btn btn-auth-lang" type="button" data-i18n="langEn">English</button>
           </div>
         </header>
@@ -44,47 +44,21 @@
                 </button>
               </div>
 
-              <div
-                id="pane-login"
-                class="auth-pane"
-                role="tabpanel"
-                aria-labelledby="auth-tab-login"
-              >
+              <div id="pane-login" class="auth-pane" role="tabpanel" aria-labelledby="auth-tab-login">
                 <form id="login-form" class="form-grid auth-form">
                   <div class="form-field">
                     <label for="login-email" data-i18n="email">Email</label>
-                    <input
-                      id="login-email"
-                      name="email"
-                      type="email"
-                      autocomplete="username"
-                      inputmode="email"
-                      required
-                    />
+                    <input id="login-email" name="email" type="email" autocomplete="username" inputmode="email" required />
                   </div>
                   <div class="form-field">
                     <label for="login-password" data-i18n="password">Password</label>
-                    <input
-                      id="login-password"
-                      name="password"
-                      type="password"
-                      autocomplete="current-password"
-                      required
-                    />
+                    <input id="login-password" name="password" type="password" autocomplete="current-password" required />
                   </div>
-                  <button class="btn btn-primary btn-auth-submit" type="submit" data-i18n="signIn">
-                    Sign in
-                  </button>
+                  <button class="btn btn-primary btn-auth-submit" type="submit" data-i18n="signIn">Sign in</button>
                 </form>
               </div>
 
-              <div
-                id="pane-register"
-                class="auth-pane hidden"
-                role="tabpanel"
-                aria-labelledby="auth-tab-register"
-                hidden
-              >
+              <div id="pane-register" class="auth-pane hidden" role="tabpanel" aria-labelledby="auth-tab-register" hidden>
                 <p class="auth-staff-note hint-muted" data-i18n="staffProvisionNote"></p>
               </div>
             </div>
@@ -123,19 +97,61 @@
                 <div class="nav-muted nav-heading" data-i18n="studentPanel">Student space</div>
               </div>
 
+              <!-- DOCTOR NAV -->
               <div id="doctor-nav-block" class="nav-extra-block" hidden>
                 <div class="nav-muted nav-heading" data-i18n="doctorPanel">Doctor space</div>
+                <button type="button" class="nav-btn" data-target-view="view-dashboard-doctor">
+                  <span class="nav-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+                    </svg>
+                  </span>
+                  <span class="nav-label">Courses</span>
+                </button>
+                <button type="button" class="nav-btn" data-target-view="view-doctor-assignments">
+                  <span class="nav-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2M9 12h6M9 16h4" />
+                    </svg>
+                  </span>
+                  <span class="nav-label">Assignments</span>
+                </button>
+                <button type="button" class="nav-btn" data-target-view="view-doctor-materials">
+                  <span class="nav-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/>
+                    </svg>
+                  </span>
+                  <span class="nav-label">Materials</span>
+                </button>
+                <button type="button" class="nav-btn" data-target-view="view-doctor-grading">
+                  <span class="nav-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                  </span>
+                  <span class="nav-label">Grading</span>
+                </button>
               </div>
 
+              <!-- ADMIN NAV -->
               <div id="admin-nav-block" class="nav-extra-block" hidden>
                 <div class="nav-muted nav-heading" data-i18n="adminPanel">Administration</div>
-                <button type="button" class="nav-btn" data-target-view="view-admin-console">
+                <button type="button" class="nav-btn" data-target-view="view-admin-users">
                   <span class="nav-icon" aria-hidden="true">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                       <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
                     </svg>
                   </span>
-                  <span class="nav-label" data-i18n="users">Users</span>
+                  <span class="nav-label">Users</span>
+                </button>
+                <button type="button" class="nav-btn" data-target-view="view-admin-courses">
+                  <span class="nav-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+                    </svg>
+                  </span>
+                  <span class="nav-label">Courses</span>
                 </button>
                 <button type="button" class="nav-btn" data-target-view="view-admin-analytics">
                   <span class="nav-icon" aria-hidden="true">
@@ -203,13 +219,7 @@
             </div>
             <div class="app-top-header-end">
               <div class="app-top-header-tools">
-                <button
-                  type="button"
-                  class="header-notif-btn"
-                  id="header-notif-btn"
-                  title="Notifications"
-                  aria-label="Notifications"
-                >
+                <button type="button" class="header-notif-btn" id="header-notif-btn" title="Notifications" aria-label="Notifications">
                   <span class="header-notif-icon" aria-hidden="true">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                       <path d="M18 8A6 6 0 106 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
@@ -224,9 +234,7 @@
                 </button>
 
                 <div class="top-actions header-lang">
-                  <button id="btn-lang-ar-app" type="button" class="btn btn-ghost btn-compact btn-lang" data-i18n="langAr">
-                    English
-                  </button>
+                  <button id="btn-lang-ar-app" type="button" class="btn btn-ghost btn-compact btn-lang" data-i18n="langAr">English</button>
                 </div>
               </div>
             </div>
@@ -235,50 +243,33 @@
           <script>
             document.addEventListener('DOMContentLoaded', function () {
               var ar = document.getElementById('btn-lang-ar-app');
-              if (ar)
-                ar.onclick = function () {
-                  window.DH_AUTH.setLang('en');
-                };
+              if (ar) ar.onclick = function () { window.DH_AUTH.setLang('en'); };
             });
           </script>
 
+          <!-- STUDENT DASHBOARD -->
           <section id="view-dashboard-student" class="view-section">
             <div id="hub-student" hidden>
               <div id="student-dash-overview" class="student-dashboard-panels">
                 <div class="stats-row" id="student-stats-row" aria-label="Summary"></div>
 
-                <section
-                  class="student-panel student-panel-courses card"
-                  aria-labelledby="student-panel-courses-title"
-                >
+                <section class="student-panel student-panel-courses card" aria-labelledby="student-panel-courses-title">
                   <div class="card-head">
                     <h2 class="card-title" id="student-panel-courses-title" data-i18n="courses">Courses</h2>
                   </div>
-                  <p class="hint-muted student-panel-desc" data-i18n="studentCoursesHint">
-                    Click a course to open its materials directly.
-                  </p>
+                  <p class="hint-muted student-panel-desc" data-i18n="studentCoursesHint">Click a course to open its materials directly.</p>
                   <div id="student-course-cards" class="course-cards-grid"></div>
                 </section>
 
-                <section
-                  class="student-panel student-panel-assignments card"
-                  aria-labelledby="student-panel-assignments-title"
-                >
+                <section class="student-panel student-panel-assignments card" aria-labelledby="student-panel-assignments-title">
                   <div class="card-head">
-                    <h2 class="card-title" id="student-panel-assignments-title" data-i18n="assignments">
-                      Assignments
-                    </h2>
+                    <h2 class="card-title" id="student-panel-assignments-title" data-i18n="assignments">Assignments</h2>
                   </div>
                   <div class="table-wrap">
                     <table class="simple">
                       <thead>
                         <tr>
-                          <th>Course</th>
-                          <th>Title</th>
-                          <th>Deadline</th>
-                          <th>File</th>
-                          <th>Grade</th>
-                          <th>Status</th>
+                          <th>Course</th><th>Title</th><th>Deadline</th><th>File</th><th>Grade</th><th>Status</th>
                         </tr>
                       </thead>
                       <tbody id="student-assignments-body"></tbody>
@@ -286,14 +277,9 @@
                   </div>
                 </section>
 
-                <section
-                  class="student-panel student-panel-submit card"
-                  aria-labelledby="student-panel-submit-title"
-                >
+                <section class="student-panel student-panel-submit card" aria-labelledby="student-panel-submit-title">
                   <div class="card-head">
-                    <h2 class="card-title" id="student-panel-submit-title" data-i18n="studentSubmitTitle">
-                      Submit assignment file
-                    </h2>
+                    <h2 class="card-title" id="student-panel-submit-title" data-i18n="studentSubmitTitle">Submit assignment file</h2>
                   </div>
                   <form id="student-submit-form" class="form-grid" enctype="multipart/form-data">
                     <div>
@@ -301,7 +287,7 @@
                       <select id="student-course-submit-select" name="course_id" required></select>
                     </div>
                     <div>
-                      <label for="student-submit-file">File (<= 10 MB)</label>
+                      <label for="student-submit-file">File (&lt;= 10 MB)</label>
                       <input id="student-submit-file" name="file" type="file" required />
                     </div>
                     <button class="btn btn-primary" type="submit">Upload</button>
@@ -327,6 +313,7 @@
             </div>
           </section>
 
+          <!-- DOCTOR DASHBOARD - COURSES -->
           <section id="view-dashboard-doctor" class="view-section">
             <div id="hub-doctor" hidden>
               <div id="doctor-courses-hub" class="doctor-courses-hub">
@@ -344,7 +331,6 @@
                       <div class="hint-muted" id="doctor-course-panel-sub"></div>
                     </div>
                   </div>
-
                   <div class="card">
                     <div class="card-head">
                       <div class="card-title">Course Files</div>
@@ -353,100 +339,111 @@
                   </div>
                 </div>
               </div>
-              <div class="card" style="margin-top: 1rem">
-                <div class="card-head">
-                  <div class="card-title">Create Assignment</div>
+            </div>
+          </section>
+
+          <!-- DOCTOR ASSIGNMENTS -->
+          <section id="view-doctor-assignments" class="view-section">
+            <div class="card">
+              <div class="card-head">
+                <div class="card-title">Create Assignment</div>
+              </div>
+              <form id="doctor-assignment-form" class="form-grid" enctype="multipart/form-data">
+                <div>
+                  <label for="doctor-assignment-course">Course</label>
+                  <select id="doctor-assignment-course" name="course_id" required></select>
                 </div>
-                <form id="doctor-assignment-form" class="form-grid" enctype="multipart/form-data">
+                <div>
+                  <label for="assignment-title">Title</label>
+                  <input id="assignment-title" name="title" required />
+                </div>
+                <div>
+                  <label for="assignment-deadline">Deadline</label>
+                  <input id="assignment-deadline" name="deadline" type="datetime-local" required />
+                </div>
+                <div>
+                  <label for="assignment-file">Attachment (optional)</label>
+                  <input id="assignment-file" name="file" type="file" />
+                </div>
+                <div>
+                  <label for="assignment-desc">Description</label>
+                  <textarea id="assignment-desc" name="description" rows="3"></textarea>
+                </div>
+                <button class="btn btn-primary" type="submit">Create</button>
+              </form>
+            </div>
+            <div class="card" style="margin-top: 1rem">
+              <div class="card-head">
+                <div class="card-title">My Assignments</div>
+              </div>
+              <div class="table-wrap">
+                <table class="simple">
+                  <thead>
+                    <tr><th>Course</th><th>Title</th><th>Deadline</th><th>Max Grade</th><th></th></tr>
+                  </thead>
+                  <tbody id="doctor-assignments-manage-body"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <!-- DOCTOR MATERIALS -->
+          <section id="view-doctor-materials" class="view-section">
+            <div class="grid-2">
+              <div class="card">
+                <div class="card-head">
+                  <div class="card-title">Upload Material</div>
+                </div>
+                <form id="doctor-material-form" class="form-grid" enctype="multipart/form-data">
                   <div>
-                    <label for="doctor-assignment-course">Course</label>
-                    <select id="doctor-assignment-course" name="course_id" required></select>
+                    <label for="doctor-material-course">Course</label>
+                    <select id="doctor-material-course" name="course_id" required></select>
                   </div>
                   <div>
-                    <label for="assignment-title">Title</label>
-                    <input id="assignment-title" name="title" required />
+                    <label for="material-title">Title</label>
+                    <input id="material-title" name="title" />
                   </div>
                   <div>
-                    <label for="assignment-deadline">Deadline</label>
-                    <input id="assignment-deadline" name="deadline" type="datetime-local" required />
+                    <label for="material-file">File</label>
+                    <input id="material-file" name="file" type="file" required />
                   </div>
-                  
-                  <div>
-                    <label for="assignment-file">Attachment (optional)</label>
-                    <input id="assignment-file" name="file" type="file" />
-                  </div>
-                  <div>
-                    <label for="assignment-desc">Description</label>
-                    <textarea id="assignment-desc" name="description" rows="3"></textarea>
-                  </div>
-                  <button class="btn btn-primary" type="submit">Create</button>
+                  <button class="btn btn-primary" type="submit">Upload</button>
                 </form>
               </div>
-
-              <div class="card" style="margin-top: 1rem">
+              <div class="card">
                 <div class="card-head">
-                  <div class="card-title">Submissions & Grading</div>
+                  <div class="card-title">Your Materials</div>
                 </div>
                 <div class="table-wrap">
                   <table class="simple">
                     <thead>
-                      <tr>
-                        <th>Student</th>
-                        <th>Assignment</th>
-                        <th>Submitted</th>
-                        <th>File</th>
-                        <th>Status</th>
-                        <th>Grade</th>
-                      </tr>
+                      <tr><th>Course</th><th>Title</th><th>Link</th><th></th></tr>
                     </thead>
-                    <tbody id="doctor-grade-body"></tbody>
+                    <tbody id="doctor-materials-body"></tbody>
                   </table>
-                </div>
-              </div>
-
-              <div class="grid-2" style="margin-top: 1rem">
-                <div class="card">
-                  <div class="card-head">
-                    <div class="card-title">Upload Material</div>
-                  </div>
-                  <form id="doctor-material-form" class="form-grid" enctype="multipart/form-data">
-                    <div>
-                      <label for="doctor-material-course">Course</label>
-                      <select id="doctor-material-course" name="course_id" required></select>
-                    </div>
-                    <div>
-                      <label for="material-title">Title</label>
-                      <input id="material-title" name="title" />
-                    </div>
-                    <div>
-                      <label for="material-file">File</label>
-                      <input id="material-file" name="file" type="file" required />
-                    </div>
-                    <button class="btn btn-primary" type="submit">Upload</button>
-                  </form>
-                </div>
-                <div class="card">
-                  <div class="card-head">
-                    <div class="card-title">Your Materials</div>
-                  </div>
-                  <div class="table-wrap">
-                    <table class="simple">
-                      <thead>
-                        <tr>
-                          <th>Course</th>
-                          <th>Title</th>
-                          <th>Link</th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <tbody id="doctor-materials-body"></tbody>
-                    </table>
-                  </div>
                 </div>
               </div>
             </div>
           </section>
 
+          <!-- DOCTOR GRADING -->
+          <section id="view-doctor-grading" class="view-section">
+            <div class="card">
+              <div class="card-head">
+                <div class="card-title">Submissions &amp; Grading</div>
+              </div>
+              <div class="table-wrap">
+                <table class="simple">
+                  <thead>
+                    <tr><th>Student</th><th>Assignment</th><th>Submitted</th><th>File</th><th>Status</th><th>Grade</th></tr>
+                  </thead>
+                  <tbody id="doctor-grade-body"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <!-- ADMIN DASHBOARD -->
           <section id="view-dashboard" class="view-section">
             <div id="hub-admin" hidden>
               <div class="hint-muted" style="margin-bottom: 0.75rem">
@@ -455,151 +452,84 @@
             </div>
           </section>
 
-          <section id="view-admin-console" class="view-section">
-            <div class="grid-2">
-              <div class="card">
-                <div class="card-head">
-                  <div class="card-title">Create User</div>
-                </div>
-                <form id="admin-user-create-form" class="form-grid">
-                  <div>
-                    <label for="new-user-name">Name</label>
-                    <input id="new-user-name" name="name" required />
-                  </div>
-                  <div>
-                    <label for="new-user-email">Email</label>
-                    <input id="new-user-email" name="email" type="email" required />
-                  </div>
-                  <div>
-                    <label for="new-user-pass">Password</label>
-                    <input id="new-user-pass" name="password" type="password" required />
-                  </div>
-                  <div>
-                    <label for="new-user-role">Role</label>
-                    <select id="new-user-role" name="role" required>
-                      <option value="student">student</option>
-                      <option value="doctor">doctor</option>
-                      <option value="admin">admin</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label for="new-user-year">Academic Year</label>
-                    <input id="new-user-year" name="academic_year" type="number" min="1" max="6" />
-                  </div>
-                  <div>
-                    <label for="new-user-dept">Department</label>
-                    <input id="new-user-dept" name="department" />
-                  </div>
-                  <button class="btn btn-primary" type="submit">Create</button>
-                </form>
+          <!-- ADMIN USERS (منفصلة) -->
+          <section id="view-admin-users" class="view-section">
+            <div class="card">
+              <div class="card-head">
+                <div class="card-title">Create User</div>
               </div>
-              <div class="card">
-                <div class="card-head">
-                  <div class="card-title">Create Course</div>
+              <form id="admin-user-create-form" class="form-grid">
+                <div><label for="new-user-name">Name</label><input id="new-user-name" name="name" required /></div>
+                <div><label for="new-user-email">Email</label><input id="new-user-email" name="email" type="email" required /></div>
+                <div><label for="new-user-pass">Password</label><input id="new-user-pass" name="password" type="password" required /></div>
+                <div>
+                  <label for="new-user-role">Role</label>
+                  <select id="new-user-role" name="role" required>
+                    <option value="student">student</option>
+                    <option value="doctor">doctor</option>
+                    <option value="admin">admin</option>
+                  </select>
                 </div>
-                <form id="admin-course-form" class="form-grid">
-                  <div>
-                    <label for="admin-course-name">Name</label>
-                    <input id="admin-course-name" name="name" required />
-                  </div>
-                  <div>
-                    <label for="admin-course-doctor">Doctor</label>
-                    <select id="admin-course-doctor" name="doctor_id" required></select>
-                  </div>
-                  <div>
-                    <label for="admin-course-year">Academic Year (optional)</label>
-                    <input id="admin-course-year" name="academic_year" type="number" min="1" max="6" />
-                  </div>
-                  <div>
-                    <label for="admin-course-dept">Department (optional)</label>
-                    <input id="admin-course-dept" name="department" />
-                  </div>
-                  <div>
-                    <label for="admin-course-desc">Description</label>
-                    <textarea id="admin-course-desc" name="description" rows="3"></textarea>
-                  </div>
-                  <button class="btn btn-primary" type="submit">Create Course</button>
-                </form>
+                <div><label for="new-user-year">Academic Year</label><input id="new-user-year" name="academic_year" type="number" min="1" max="6" /></div>
+                <div><label for="new-user-dept">Department</label><input id="new-user-dept" name="department" /></div>
+                <button class="btn btn-primary" type="submit">Create</button>
+              </form>
+            </div>
+            <div class="card" style="margin-top: 1.5rem">
+              <div class="card-head"><div class="card-title">Users Directory</div></div>
+              <div class="table-wrap">
+                <table class="simple">
+                  <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>Academic Year</th><th>Department</th><th>Actions</th></tr></thead>
+                  <tbody id="admin-users-body"></tbody>
+                </table>
               </div>
             </div>
-            <div class="grid-2" style="margin-top: 1.5rem">
-              <div class="card">
-                <div class="card-head">
-                  <div class="card-title">Manage Courses</div>
-                </div>
-                <div class="table-wrap">
-                  <table class="simple">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Doctor</th>
-                        <th>Year</th>
-                        <th>Department</th>
-                        <th>Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody id="admin-courses-body"></tbody>
-                  </table>
-                </div>
+          </section>
+
+          <!-- ADMIN COURSES (منفصلة) -->
+          <section id="view-admin-courses" class="view-section">
+            <div class="card">
+              <div class="card-head">
+                <div class="card-title">Create Course</div>
               </div>
-              <div class="card">
-                <div class="card-head">
-                  <div class="card-title">Users Directory</div>
-                </div>
-                <div class="table-wrap">
-                  <table class="simple">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Academic Year</th>
-                        <th>Department</th>
-                        <th>Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody id="admin-users-body"></tbody>
-                  </table>
-                </div>
+              <form id="admin-course-form" class="form-grid">
+                <div><label for="admin-course-name">Name</label><input id="admin-course-name" name="name" required /></div>
+                <div><label for="admin-course-doctor">Doctor</label><select id="admin-course-doctor" name="doctor_id" required></select></div>
+                <div><label for="admin-course-year">Academic Year (optional)</label><input id="admin-course-year" name="academic_year" type="number" min="1" max="6" /></div>
+                <div><label for="admin-course-dept">Department (optional)</label><input id="admin-course-dept" name="department" /></div>
+                <div><label for="admin-course-desc">Description</label><textarea id="admin-course-desc" name="description" rows="3"></textarea></div>
+                <button class="btn btn-primary" type="submit">Create Course</button>
+              </form>
+            </div>
+            <div class="card" style="margin-top: 1.5rem">
+              <div class="card-head"><div class="card-title">Manage Courses</div></div>
+              <div class="table-wrap">
+                <table class="simple">
+                  <thead><tr><th>ID</th><th>Name</th><th>Doctor</th><th>Year</th><th>Department</th><th>Actions</th></tr></thead>
+                  <tbody id="admin-courses-body"></tbody>
+                </table>
               </div>
             </div>
             <div class="card" style="margin-top: 1.5rem">
-              <div class="card-head">
-                <div class="card-title">All Student Submissions</div>
-              </div>
+              <div class="card-head"><div class="card-title">All Student Submissions</div></div>
               <div class="table-wrap">
                 <table class="simple">
-                  <thead>
-                    <tr>
-                      <th>Student</th>
-                      <th>Course</th>
-                      <th>Assignment</th>
-                      <th>Submitted At</th>
-                      <th>File</th>
-                      <th>Status</th>
-                      <th>Grade</th>
-                    </tr>
-                  </thead>
+                  <thead><tr><th>Student</th><th>Course</th><th>Assignment</th><th>Submitted At</th><th>File</th><th>Status</th><th>Grade</th></tr></thead>
                   <tbody id="admin-submissions-body"></tbody>
                 </table>
               </div>
             </div>
           </section>
 
+          <!-- ADMIN ANALYTICS -->
           <section id="view-admin-analytics" class="view-section">
             <div class="grid-2">
               <div class="card">
-                <div class="card-head">
-                  <div class="card-title">Role distribution</div>
-                </div>
+                <div class="card-head"><div class="card-title">Role distribution</div></div>
                 <div id="admin-stats-chart"></div>
               </div>
               <div class="card">
-                <div class="card-head">
-                  <div class="card-title">Key metrics</div>
-                </div>
+                <div class="card-head"><div class="card-title">Key metrics</div></div>
                 <div id="admin-stats-meta" class="grid-2"></div>
                 <div style="margin-top: 0.75rem">
                   <div class="nav-muted" style="margin-bottom: 0.35rem">Recent submissions</div>
@@ -609,18 +539,16 @@
             </div>
           </section>
 
+          <!-- ADMIN EXPORT -->
           <section id="view-admin-export" class="view-section">
             <div class="card">
-              <div class="card-head">
-                <div class="card-title">CSV export</div>
-              </div>
-              <p class="hint-muted">
-                Download all submissions including student, assignment, course, grade, and timestamp.
-              </p>
+              <div class="card-head"><div class="card-title">CSV export</div></div>
+              <p class="hint-muted">Download all submissions including student, assignment, course, grade, and timestamp.</p>
               <button id="admin-export-btn" class="btn btn-primary" type="button">Download CSV</button>
             </div>
           </section>
 
+          <!-- NOTIFICATIONS -->
           <section id="view-notifications" class="view-section">
             <div class="card">
               <div class="card-head">
@@ -631,39 +559,22 @@
             </div>
           </section>
 
+          <!-- PROFILE -->
           <section id="view-profile" class="view-section">
             <div class="card profile-card">
               <div class="card-head profile-card-head">
                 <div class="profile-card-head-brand">
                   <div class="card-title" data-i18n="profile">Profile</div>
                 </div>
-                <span class="pill"> <span data-i18n="roleLabel">Role</span>: <span id="profile-role"></span> </span>
+                <span class="pill"><span data-i18n="roleLabel">Role</span>: <span id="profile-role"></span></span>
               </div>
               <form id="profile-form" class="form-grid">
-                <div>
-                  <label for="profile-name" data-i18n="name">Full name</label>
-                  <input id="profile-name" required />
-                </div>
-                <div>
-                  <label for="profile-email" data-i18n="email">Email</label>
-                  <input id="profile-email" type="email" disabled />
-                </div>
-                <div>
-                  <label for="profile-year" data-i18n="academicYear">Academic year (optional)</label>
-                  <input id="profile-year" type="number" min="1" max="6" />
-                </div>
-                <div>
-                  <label for="profile-dept" data-i18n="department">Department (optional)</label>
-                  <input id="profile-dept" />
-                </div>
-                <div>
-                  <label for="profile-current-pass" data-i18n="currentPassword">Current password</label>
-                  <input id="profile-current-pass" type="password" autocomplete="current-password" />
-                </div>
-                <div>
-                  <label for="profile-new-pass" data-i18n="newPassword">New password</label>
-                  <input id="profile-new-pass" type="password" autocomplete="new-password" />
-                </div>
+                <div><label for="profile-name" data-i18n="name">Full name</label><input id="profile-name" required /></div>
+                <div><label for="profile-email" data-i18n="email">Email</label><input id="profile-email" type="email" disabled /></div>
+                <div><label for="profile-year" data-i18n="academicYear">Academic year (optional)</label><input id="profile-year" type="number" min="1" max="6" /></div>
+                <div><label for="profile-dept" data-i18n="department">Department (optional)</label><input id="profile-dept" /></div>
+                <div><label for="profile-current-pass" data-i18n="currentPassword">Current password</label><input id="profile-current-pass" type="password" autocomplete="current-password" /></div>
+                <div><label for="profile-new-pass" data-i18n="newPassword">New password</label><input id="profile-new-pass" type="password" autocomplete="new-password" /></div>
                 <button class="btn btn-primary" type="submit" data-i18n="saveProfile">Save profile</button>
               </form>
             </div>
@@ -678,7 +589,3 @@
     <script src="/js/dashboard.js" defer></script>
   </body>
 </html>
-
-
-
-
