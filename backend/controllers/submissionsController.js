@@ -1,6 +1,27 @@
-const path = require('path');
-const fs = require('fs');
 const { query } = require('../models/db');
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+async function uploadToCloudinary(filePath, folder) {
+  return new Promise((resolve, reject) => {
+    cloudinary.uploader.upload(
+      filePath,
+      {
+        folder: folder,
+        resource_type: 'auto',
+      },
+      (error, result) => {
+        if (error) reject(error);
+        else resolve(result.secure_url);
+      }
+    );
+  });
+}
 
 async function getAssignmentWithCourse(assignmentId) {
   return query(
@@ -151,13 +172,10 @@ async function createSubmission(req, res) {
       { uid: user.id, aid: assignmentId }
     );
     if (existing.length) {
-      try {
-        fs.unlinkSync(path.join(__dirname, '..', '..', 'uploads', 'submissions', req.file.filename));
-      } catch (_) {}
       return res.status(409).json({ error: 'You already submitted this assignment' });
     }
 
-    const baseUrl = process.env.RAILWAY_URL || `http://localhost:${process.env.PORT || 3000}`; const fileUrl = `${baseUrl}/uploads/submissions/${req.file.filename}`;
+    const fileUrl = await uploadToCloudinary(req.file.path, 'submissions');
     const status = isLate ? 'late' : 'submitted';
 
     const result = await query(
