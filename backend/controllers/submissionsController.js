@@ -157,7 +157,7 @@ async function createSubmission(req, res) {
       return res.status(409).json({ error: 'You already submitted this assignment' });
     }
 
-    const fileUrl = `/uploads/submissions/${req.file.filename}`;
+    const baseUrl = process.env.RAILWAY_URL || `http://localhost:${process.env.PORT || 3000}`; const fileUrl = `${baseUrl}/uploads/submissions/${req.file.filename}`;
     const status = isLate ? 'late' : 'submitted';
 
     const result = await query(
