@@ -1,4 +1,11 @@
 const { query } = require('../models/db');
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 async function ensureDoctorOwnsCourse(doctorUserId, courseId) {
   const rows = await query(`SELECT id, doctor_id FROM courses WHERE id = :cid LIMIT 1`, {
@@ -124,78 +131,95 @@ async function deleteMaterial(req, res) {
   }
 }
 
+async function uploadToCloudinary(filePath, folder) {
+  return new Promise((resolve, reject) => {
+    cloudinary.uploader.upload(
+      filePath,
+      {
+        folder: folder,
+        resource_type: 'auto',
+      },
+      (error, result) => {
+        if (error) reject(error);
+        else resolve(result.secure_url);
+      }
+    );
+  });
+}
+
 async function createMaterial(req, res) {
-    try {
-      const user = req.user;
-      if (user.role !== 'doctor' && user.role !== 'admin') {
-        return res.status(403).json({ error: 'Forbidden' });
-      }
-      const courseId = Number(req.body.course_id);
-      if (!courseId || !req.file) {
-        return res.status(400).json({ error: 'course_id and file are required' });
-      }
-      const title = req.body.title ? String(req.body.title).trim() : req.file.originalname;
-
-      if (user.role === 'doctor') {
-        const check = await ensureDoctorOwnsCourse(user.id, courseId);
-        if (!check.ok) {
-          return res.status(check.status).json({ error: check.error });
-        }
-      } else {
-        const c = await query(`SELECT id FROM courses WHERE id = :cid LIMIT 1`, { cid: courseId });
-        if (!c.length) {
-          return res.status(404).json({ error: 'Course not found' });
-        }
-      }
-
-      const fileUrl = `/uploads/materials/${req.file.filename}`;
-      const uploaderId = user.role === 'admin' && req.body.uploaded_by
-        ? Number(req.body.uploaded_by)
-        : user.id;
-      if (user.role === 'admin' && req.body.uploaded_by) {
-        const u = await query(`SELECT id, role FROM users WHERE id = :id LIMIT 1`, { id: uploaderId });
-        if (!u.length || u[0].role !== 'doctor') {
-          return res.status(400).json({ error: 'uploaded_by must be a doctor' });
-        }
-      }
-
-      const result = await query(
-        `INSERT INTO materials (course_id, title, file_url, uploaded_by)
-         VALUES (:course_id, :title, :file_url, :uploaded_by)`,
-        {
-          course_id: courseId,
-          title,
-          file_url: fileUrl,
-          uploaded_by: uploaderId,
-        }
-      );
-
-      const mid = result.insertId;
-      const rowsOut = await query(
-        `SELECT m.*, u.name AS uploader_name, c.name AS course_name
-         FROM materials m
-         JOIN users u ON u.id = m.uploaded_by
-         JOIN courses c ON c.id = m.course_id
-         WHERE m.id = :id LIMIT 1`,
-        { id: mid }
-      );
-
-      const students = await query(`SELECT id FROM users WHERE role = 'student'`);
-      const msg = `New material "${title}" uploaded for course ${rowsOut[0].course_name}.`;
-      await Promise.all(
-        students.map((s) =>
-          query(
-            `INSERT INTO notifications (user_id, title, message) VALUES (:uid, :t, :m)`,
-            { uid: s.id, t: 'New material', m: msg }
-          ).catch(() => {})
-        )
-      );
-
-      return res.status(201).json({ material: rowsOut[0] });
-    } catch (err) {
-      console.error('createMaterial error', err);
-      return res.status(500).json({ error: 'Failed to upload material' });
+  try {
+    const user = req.user;
+    if (user.role !== 'doctor' && user.role !== 'admin') {
+      return res.status(403).json({ error: 'Forbidden' });
     }
+    const courseId = Number(req.body.course_id);
+    if (!courseId || !req.file) {
+      return res.status(400).json({ error: 'course_id and file are required' });
+    }
+    const title = req.body.title ? String(req.body.title).trim() : req.file.originalname;
+
+    if (user.role === 'doctor') {
+      const check = await ensureDoctorOwnsCourse(user.id, courseId);
+      if (!check.ok) {
+        return res.status(check.status).json({ error: check.error });
+      }
+    } else {
+      const c = await query(`SELECT id FROM courses WHERE id = :cid LIMIT 1`, { cid: courseId });
+      if (!c.length) {
+        return res.status(404).json({ error: 'Course not found' });
+      }
+    }
+
+    const fileUrl = await uploadToCloudinary(req.file.path, 'materials');
+
+    const uploaderId = user.role === 'admin' && req.body.uploaded_by
+      ? Number(req.body.uploaded_by)
+      : user.id;
+    if (user.role === 'admin' && req.body.uploaded_by) {
+      const u = await query(`SELECT id, role FROM users WHERE id = :id LIMIT 1`, { id: uploaderId });
+      if (!u.length || u[0].role !== 'doctor') {
+        return res.status(400).json({ error: 'uploaded_by must be a doctor' });
+      }
+    }
+
+    const result = await query(
+      `INSERT INTO materials (course_id, title, file_url, uploaded_by)
+       VALUES (:course_id, :title, :file_url, :uploaded_by)`,
+      {
+        course_id: courseId,
+        title,
+        file_url: fileUrl,
+        uploaded_by: uploaderId,
+      }
+    );
+
+    const mid = result.insertId;
+    const rowsOut = await query(
+      `SELECT m.*, u.name AS uploader_name, c.name AS course_name
+       FROM materials m
+       JOIN users u ON u.id = m.uploaded_by
+       JOIN courses c ON c.id = m.course_id
+       WHERE m.id = :id LIMIT 1`,
+      { id: mid }
+    );
+
+    const students = await query(`SELECT id FROM users WHERE role = 'student'`);
+    const msg = `New material "${title}" uploaded for course ${rowsOut[0].course_name}.`;
+    await Promise.all(
+      students.map((s) =>
+        query(
+          `INSERT INTO notifications (user_id, title, message) VALUES (:uid, :t, :m)`,
+          { uid: s.id, t: 'New material', m: msg }
+        ).catch(() => {})
+      )
+    );
+
+    return res.status(201).json({ material: rowsOut[0] });
+  } catch (err) {
+    console.error('createMaterial error', err);
+    return res.status(500).json({ error: 'Failed to upload material' });
+  }
 }
 
 module.exports = {

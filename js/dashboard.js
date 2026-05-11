@@ -1198,7 +1198,6 @@
       if (!userId) return;
 
       if (btn.classList.contains('edit-user-btn')) {
-        // Edit user
         const newName = prompt('Enter new name:');
         if (!newName) return;
         const newEmail = prompt('Enter new email:');
@@ -1221,7 +1220,6 @@
           window.DH_AUTH.showToast(err.message, true);
         }
       } else if (btn.classList.contains('delete-user-btn')) {
-        // Delete user
         if (!confirm('Are you sure you want to delete this user?')) return;
         try {
           await window.DH_AUTH.apiJson('/api/admin/users/' + userId, {
@@ -1261,6 +1259,7 @@
     }
   }
 
+  // ✅ التعديل هنا: بدل view-admin-console بقت view-admin-users أو view-admin-courses
   function onSectionShown(id) {
     if (id === 'view-profile') {
       fillProfileForm().catch(function () {});
@@ -1275,7 +1274,7 @@
     if (
       window.DH_APP_STATE.user &&
       window.DH_APP_STATE.user.role === 'admin' &&
-      id === 'view-admin-console'
+      (id === 'view-admin-users' || id === 'view-admin-courses')
     ) {
       refreshAdminUsers().catch(function () {});
       refreshAdminCourses().catch(function () {});
@@ -1285,7 +1284,8 @@
         window.DH_AUTH.showToast(err.message, true);
       });
       bindAdminUserActions();
-      document.getElementById('admin-export-btn').onclick = exportCsv;
+      const exportBtn = document.getElementById('admin-export-btn');
+      if (exportBtn) exportBtn.onclick = exportCsv;
     }
   }
 

@@ -137,13 +137,21 @@
               <!-- ADMIN NAV -->
               <div id="admin-nav-block" class="nav-extra-block" hidden>
                 <div class="nav-muted nav-heading" data-i18n="adminPanel">Administration</div>
-                <button type="button" class="nav-btn" data-target-view="view-admin-console">
+                <button type="button" class="nav-btn" data-target-view="view-admin-users">
                   <span class="nav-icon" aria-hidden="true">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                       <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
                     </svg>
                   </span>
-                  <span class="nav-label" data-i18n="users">Users</span>
+                  <span class="nav-label">Users</span>
+                </button>
+                <button type="button" class="nav-btn" data-target-view="view-admin-courses">
+                  <span class="nav-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+                    </svg>
+                  </span>
+                  <span class="nav-label">Courses</span>
                 </button>
                 <button type="button" class="nav-btn" data-target-view="view-admin-analytics">
                   <span class="nav-icon" aria-hidden="true">
@@ -444,62 +452,62 @@
             </div>
           </section>
 
-          <!-- ADMIN CONSOLE -->
-          <section id="view-admin-console" class="view-section">
-            <div class="grid-2">
-              <div class="card">
-                <div class="card-head">
-                  <div class="card-title">Create User</div>
-                </div>
-                <form id="admin-user-create-form" class="form-grid">
-                  <div><label for="new-user-name">Name</label><input id="new-user-name" name="name" required /></div>
-                  <div><label for="new-user-email">Email</label><input id="new-user-email" name="email" type="email" required /></div>
-                  <div><label for="new-user-pass">Password</label><input id="new-user-pass" name="password" type="password" required /></div>
-                  <div>
-                    <label for="new-user-role">Role</label>
-                    <select id="new-user-role" name="role" required>
-                      <option value="student">student</option>
-                      <option value="doctor">doctor</option>
-                      <option value="admin">admin</option>
-                    </select>
-                  </div>
-                  <div><label for="new-user-year">Academic Year</label><input id="new-user-year" name="academic_year" type="number" min="1" max="6" /></div>
-                  <div><label for="new-user-dept">Department</label><input id="new-user-dept" name="department" /></div>
-                  <button class="btn btn-primary" type="submit">Create</button>
-                </form>
+          <!-- ADMIN USERS (منفصلة) -->
+          <section id="view-admin-users" class="view-section">
+            <div class="card">
+              <div class="card-head">
+                <div class="card-title">Create User</div>
               </div>
-              <div class="card">
-                <div class="card-head">
-                  <div class="card-title">Create Course</div>
+              <form id="admin-user-create-form" class="form-grid">
+                <div><label for="new-user-name">Name</label><input id="new-user-name" name="name" required /></div>
+                <div><label for="new-user-email">Email</label><input id="new-user-email" name="email" type="email" required /></div>
+                <div><label for="new-user-pass">Password</label><input id="new-user-pass" name="password" type="password" required /></div>
+                <div>
+                  <label for="new-user-role">Role</label>
+                  <select id="new-user-role" name="role" required>
+                    <option value="student">student</option>
+                    <option value="doctor">doctor</option>
+                    <option value="admin">admin</option>
+                  </select>
                 </div>
-                <form id="admin-course-form" class="form-grid">
-                  <div><label for="admin-course-name">Name</label><input id="admin-course-name" name="name" required /></div>
-                  <div><label for="admin-course-doctor">Doctor</label><select id="admin-course-doctor" name="doctor_id" required></select></div>
-                  <div><label for="admin-course-year">Academic Year (optional)</label><input id="admin-course-year" name="academic_year" type="number" min="1" max="6" /></div>
-                  <div><label for="admin-course-dept">Department (optional)</label><input id="admin-course-dept" name="department" /></div>
-                  <div><label for="admin-course-desc">Description</label><textarea id="admin-course-desc" name="description" rows="3"></textarea></div>
-                  <button class="btn btn-primary" type="submit">Create Course</button>
-                </form>
+                <div><label for="new-user-year">Academic Year</label><input id="new-user-year" name="academic_year" type="number" min="1" max="6" /></div>
+                <div><label for="new-user-dept">Department</label><input id="new-user-dept" name="department" /></div>
+                <button class="btn btn-primary" type="submit">Create</button>
+              </form>
+            </div>
+            <div class="card" style="margin-top: 1.5rem">
+              <div class="card-head"><div class="card-title">Users Directory</div></div>
+              <div class="table-wrap">
+                <table class="simple">
+                  <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>Academic Year</th><th>Department</th><th>Actions</th></tr></thead>
+                  <tbody id="admin-users-body"></tbody>
+                </table>
               </div>
             </div>
-            <div class="grid-2" style="margin-top: 1.5rem">
-              <div class="card">
-                <div class="card-head"><div class="card-title">Manage Courses</div></div>
-                <div class="table-wrap">
-                  <table class="simple">
-                    <thead><tr><th>ID</th><th>Name</th><th>Doctor</th><th>Year</th><th>Department</th><th>Actions</th></tr></thead>
-                    <tbody id="admin-courses-body"></tbody>
-                  </table>
-                </div>
+          </section>
+
+          <!-- ADMIN COURSES (منفصلة) -->
+          <section id="view-admin-courses" class="view-section">
+            <div class="card">
+              <div class="card-head">
+                <div class="card-title">Create Course</div>
               </div>
-              <div class="card">
-                <div class="card-head"><div class="card-title">Users Directory</div></div>
-                <div class="table-wrap">
-                  <table class="simple">
-                    <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>Academic Year</th><th>Department</th><th>Actions</th></tr></thead>
-                    <tbody id="admin-users-body"></tbody>
-                  </table>
-                </div>
+              <form id="admin-course-form" class="form-grid">
+                <div><label for="admin-course-name">Name</label><input id="admin-course-name" name="name" required /></div>
+                <div><label for="admin-course-doctor">Doctor</label><select id="admin-course-doctor" name="doctor_id" required></select></div>
+                <div><label for="admin-course-year">Academic Year (optional)</label><input id="admin-course-year" name="academic_year" type="number" min="1" max="6" /></div>
+                <div><label for="admin-course-dept">Department (optional)</label><input id="admin-course-dept" name="department" /></div>
+                <div><label for="admin-course-desc">Description</label><textarea id="admin-course-desc" name="description" rows="3"></textarea></div>
+                <button class="btn btn-primary" type="submit">Create Course</button>
+              </form>
+            </div>
+            <div class="card" style="margin-top: 1.5rem">
+              <div class="card-head"><div class="card-title">Manage Courses</div></div>
+              <div class="table-wrap">
+                <table class="simple">
+                  <thead><tr><th>ID</th><th>Name</th><th>Doctor</th><th>Year</th><th>Department</th><th>Actions</th></tr></thead>
+                  <tbody id="admin-courses-body"></tbody>
+                </table>
               </div>
             </div>
             <div class="card" style="margin-top: 1.5rem">
