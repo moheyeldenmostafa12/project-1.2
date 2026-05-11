@@ -13,7 +13,7 @@ async function uploadToCloudinary(filePath, folder) {
       filePath,
       {
         folder: folder,
-        resource_type: 'auto',
+        resource_type: 'raw',
       },
       (error, result) => {
         if (error) reject(error);
